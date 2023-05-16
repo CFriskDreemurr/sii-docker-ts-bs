@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./src:/usr/src
-      - ./nodemon.json:/home/node/app/nodemon.json
+      - ./src:/home/app/src
+      - ./nodemon.json:/home/app/nodemon.json
     container_name: ts-node-docker
     expose:
       - '4000'

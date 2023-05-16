@@ -11,14 +11,14 @@ Content-Type: application/json
 }
 
 ### GET a product by id
-GET http://localhost:4000/products/645b9a3ab5a9f65a42b2164e
+GET http://localhost:4000/products/646345362823cbcae40bef3b
 
 ### Update a product by id
-PUT  http://localhost:4000/products/645b9a3ab5a9f65a42b2164e
+PUT  http://localhost:4000/products/646345362823cbcae40bef3b
 Content-Type: application/json
 
 {
-  "price": 5999
+  "price": 69
 }
 
 
@@ -26,5 +26,5 @@ Content-Type: application/json
 DELETE  http://localhost:4000/products/645b9a3ab5a9f65a42b2164e
 
 ### 404 route Not Found
-GET http://localhost:4000/645b8fe2b5a9f65a42b2164c
+GET http://localhost:4000/646345362823cbcae40bef3b
 
