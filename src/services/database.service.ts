@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 
 export const collections: { products?: mongoDB.Collection } = {}
 
-export async function connectToDatabase () {
+export async function connectToDatabase() {
     dotenv.config();
  
     const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.MONGO_URI || "mongodb://root:Start1234@mongo:27017");
