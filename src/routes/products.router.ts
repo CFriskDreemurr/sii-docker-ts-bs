@@ -9,7 +9,6 @@ const request = require('supertest');
 
 productsRouter.get("/", ProductController.getAll);
 
-
 productsRouter.get("/:id", ProductController.getOne);
 
 productsRouter.post("/", ProductController.post);
