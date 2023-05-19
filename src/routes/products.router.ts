@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 export const productsRouter = express.Router();
 
-const ProductController = require("..\controllers\products.contoller.ts");
+const ProductController = require("..\controllers\products.contoller");
 
 productsRouter.use(express.json());
 
