@@ -1,19 +1,20 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { ObjectId } from "mongodb";
 import { collections } from "../services/database.service";
 import Product from "../models/products";
 
-exports.getAll = async (_req: Request, res: Response) => {
+exports.getAll = async (_req: Request, res: Response, next:NextFunction) => {
     try {
        const products = (await collections.products?.find({}).toArray()) as unknown as Product[];
   
         res.status(200).send(products);
     } catch (error:any) {
         res.status(500).send(error.message);
+        next(error)
     }
 }
 
-exports.getOne = async (req: Request, res: Response) => {
+exports.getOne = async (req: Request, res: Response, next:NextFunction) => {
     const id = req?.params?.id;
 
     try {
@@ -26,11 +27,12 @@ exports.getOne = async (req: Request, res: Response) => {
         }
     } catch (error) {
         res.status(404).send(`Unable to find product with id: ${req.params.id}`);
+        next(error)
     }
     
 }
 
-exports.post = async (req: Request, res: Response) => {
+exports.post = async (req: Request, res: Response, next:NextFunction) => {
     try {
         const newProduct = req.body as Product;
         const result = await collections.products?.insertOne(newProduct);
@@ -39,12 +41,12 @@ exports.post = async (req: Request, res: Response) => {
             ? res.status(201).send(`Successfully created a new product with id ${result.insertedId}`)
             : res.status(500).send("Failed to create a new product.");
     } catch (error:any) {
-        console.error(error);
         res.status(400).send(error.message);
+        next(error);
     }
 }
 
-exports.put = async (req: Request, res: Response) => {
+exports.put = async (req: Request, res: Response, next:NextFunction) => {
     const id = req?.params?.id;
 
     try {
@@ -57,12 +59,12 @@ exports.put = async (req: Request, res: Response) => {
             ? res.status(200).send(`Successfully updated product with id ${id}`)
             : res.status(304).send(`Product with id: ${id} not updated`);
     } catch (error:any) {
-        console.error(error.message);
         res.status(400).send(error.message);
+        next(error);
     }
 }
 
-exports.delete = async (req: Request, res: Response) => {
+exports.delete = async (req: Request, res: Response, next:NextFunction) => {
     const id = req?.params?.id;
 
     try {
@@ -77,7 +79,7 @@ exports.delete = async (req: Request, res: Response) => {
             res.status(404).send(`Product with id ${id} does not exist`);
         }
     } catch (error:any) {
-        console.error(error.message);
         res.status(400).send(error.message);
+        next(error);
     }
 }
