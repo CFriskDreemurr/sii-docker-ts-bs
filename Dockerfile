@@ -8,4 +8,4 @@ RUN npm i
 
 COPY . .
 
-CMD ["npm", "start"]
+CMD ["pm2", "start", "src/ecosystem.config.js"]
